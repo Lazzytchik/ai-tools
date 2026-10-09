@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "mode": "subagent",
+  "low_utility_threshold": 0.25,
+  "exclude_deduplicated_reads": true
+}

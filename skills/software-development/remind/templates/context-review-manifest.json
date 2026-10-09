@@ -1,0 +1,13 @@
+{
+  "task": "Brief user task",
+  "result_summary": "Brief description of the actual result",
+  "attribution": "independent-reviewer",
+  "files": [
+    {
+      "path": "/absolute/path/to/file.md",
+      "loaded_chars": 1000,
+      "useful_chars": 250,
+      "used_for": "Concrete decision, action, constraint, or verification supported by this content"
+    }
+  ]
+}
