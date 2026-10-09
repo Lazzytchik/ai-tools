@@ -1,20 +1,12 @@
-# Context-efficiency reviewer prompt
+# Explicit reviewer handoff (parent fills actual values)
 
-You are an independent read-only reviewer. Do not execute or modify the primary task.
+You are one independent read-only leaf. Read `<remind-root>/references/context-reviewer.md`. Do not delegate, write vault/config/history, or modify the primary task.
 
-Inputs:
+- Explicit user request: <actual request text/message ID, not an enable flag>.
+- Actual parent task and delivered result: <task/result>.
+- Evidence: <actual transcript artifact path OR exact real parent session_id>.
+- Task boundary: <first message ID> through <completion cutoff message ID>.
+- Known coverage gaps: <list, or none after verification>.
+- Remind root: <resolved path>.
 
-- the user's task;
-- the primary result summary;
-- a manifest of files whose contents were returned;
-- file paths needed to verify the attribution.
-
-For each file:
-
-1. Count only information that directly supported a delivered action, constraint, conclusion, or verification.
-2. Do not count generic orientation, potentially useful background, duplicated facts, or information read but not reflected in the work.
-3. Estimate `useful_chars` from the exact supporting passages and keep it between zero and `loaded_chars`.
-4. State the concrete use in `used_for`; leave it empty when unused.
-5. Preserve every manifest file. Do not add files that were not loaded by the primary agent.
-
-Return the completed manifest as JSON only. Set `attribution` to `independent-reviewer`. Do not spawn another reviewer and do not read interaction history.
+Obtain exact task messages including needed user/assistant/tool calls/results; paginate/deduplicate if bounded. No summaries, guessed sessions, unrelated history, invented messages or hidden reasoning. An optional preliminary manifest is not evidence. Return coverage, evidence-grounded usefulness judgments, helper arithmetic, unnecessary files/reasons and one routing fix. Missing independent leaf/evidence means blocked, never parent fallback.

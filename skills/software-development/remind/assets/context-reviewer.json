@@ -1,6 +1,6 @@
 {
-  "enabled": true,
-  "mode": "subagent",
+  "enabled": false,
+  "mode": "explicit-request-only",
   "low_utility_threshold": 0.25,
   "exclude_deduplicated_reads": true
 }

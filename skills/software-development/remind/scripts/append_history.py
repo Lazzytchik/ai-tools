@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Append one terse, non-normative interaction summary atomically."""
+"""Writer-only helper: append one terse non-normative summary atomically.
+
+Caller must serialize with the vault writer queue; role is a procedural contract.
+"""
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
+from datetime import date as iso_date, datetime, timezone
 import os
 from pathlib import Path
 import tempfile
@@ -29,25 +32,26 @@ def clean(value: str, name: str, limit: int) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scope", required=True)
     parser.add_argument("--summary", required=True)
-    parser.add_argument("--date", help="ISO date; defaults to current UTC date")
+    parser.add_argument("--date", help="ISO YYYY-MM-DD; defaults to current UTC date")
     args = parser.parse_args()
-
     scope = clean(args.scope, "scope", MAX_SCOPE)
     summary = clean(args.summary, "summary", MAX_SUMMARY)
     date = args.date or datetime.now(timezone.utc).date().isoformat()
-
+    try:
+        if iso_date.fromisoformat(date).isoformat() != date:
+            fail("date must be ISO YYYY-MM-DD")
+    except ValueError:
+        fail("date must be ISO YYYY-MM-DD")
     if not HISTORY.exists():
         fail(f"missing history file: {HISTORY}")
     old = HISTORY.read_text(encoding="utf-8")
     if old.count(MARKER) != 1:
         fail("history append marker missing or duplicated")
-
     entry = f"- {date} — {scope} — {summary}"
     new = old.replace(MARKER, f"{MARKER}\n{entry}", 1)
-
     fd, raw = tempfile.mkstemp(prefix=".interaction-history.", suffix=".tmp", dir=HISTORY.parent)
     tmp = Path(raw)
     try:
@@ -58,7 +62,6 @@ def main() -> None:
         os.replace(tmp, HISTORY)
     finally:
         tmp.unlink(missing_ok=True)
-
     print(entry)
 
 

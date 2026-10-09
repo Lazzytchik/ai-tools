@@ -1,13 +1,29 @@
 {
-  "task": "Brief user task",
-  "result_summary": "Brief description of the actual result",
+  "task": "Replace with the actual parent task",
   "attribution": "independent-reviewer",
   "files": [
     {
-      "path": "/absolute/path/to/file.md",
-      "loaded_chars": 1000,
-      "useful_chars": 250,
-      "used_for": "Concrete decision, action, constraint, or verification supported by this content"
+      "path": "/actual/path/from/tool-result.md",
+      "loaded_chars": 10,
+      "useful_chars": 4,
+      "used_for": "Replace with the concrete supported task action",
+      "loaded_evidence": [
+        {
+          "message_id": "ACTUAL_TOOL_MESSAGE_ID",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "useful_evidence": [
+        {
+          "message_id": "ACTUAL_TOOL_MESSAGE_ID",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "supports": [
+        "ACTUAL_DELIVERED_MESSAGE_ID"
+      ]
     }
   ]
 }

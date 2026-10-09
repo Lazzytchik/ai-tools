@@ -1,6 +1,6 @@
 # _index.md Template
 
-Use this template when creating a new `_index.md` for a vault directory.
+Only a designated writer child creates/updates this index under `references/vault-writer.md`; parent/reviewer never mutate it.
 
 ```markdown
 # <relative-path>/ — <Short Scope Title>
@@ -20,9 +20,4 @@ Use this template when creating a new `_index.md` for a vault directory.
 Если content-файлов нет: "Нет содержимых файлов на этом уровне."
 ```
 
-Rules:
-
-1. List every immediate subdirectory and content file.
-2. Give each entry a restrictive routing condition.
-3. Update the index in the same operation as add, remove, rename, or purpose change.
-4. Describe only the current snapshot; do not include decision IDs, chronology, or history links.
+List every immediate subdirectory/content file (except the index itself and hidden application metadata); give restrictive gates. Reread the target and affected ancestors before patching; serialize with all writers on this vault, preserve concurrent additions, deduplicate, replace obsolete rules. Verify inventory and affected ancestor routing after create/update/rename/delete. Current snapshot only, no chronology, decision IDs or history links.
