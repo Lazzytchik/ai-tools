@@ -1,0 +1,26 @@
+# Python runtime files
+__pycache__/
+*.py[cod]
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+
+# Hermes runtime metadata
+.usage.json*
+.curator*
+.bundled_manifest
+
+# Remind interaction history is local-only; the template is public.
+/skills/software-development/remind/references/interaction-history.md
+
+# Only the empty starter vault indexes belong in this public repository.
+/skills/software-development/remind/vault/**
+!/skills/software-development/remind/vault/*/
+!/skills/software-development/remind/vault/_index.md
+!/skills/software-development/remind/vault/00-meta/_index.md
+!/skills/software-development/remind/vault/10-global/_index.md
+!/skills/software-development/remind/vault/20-hermes/_index.md
+!/skills/software-development/remind/vault/30-cross-project-development/_index.md
+!/skills/software-development/remind/vault/40-projects/_index.md
